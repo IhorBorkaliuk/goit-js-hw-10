@@ -13,7 +13,6 @@ input.addEventListener('input', debounce(findCountry, DEBOUNCE_DELAY))
 
 
 function findCountry(evt) {
-
     const inputedValue = evt.target.value.trim();
     if (!inputedValue) {
         return
@@ -35,7 +34,6 @@ function findCountry(evt) {
     
     }).catch(error => {
         Notiflix.Notify.failure('Oops, there is no country with that name')
-        clearContent()
     })
 }
 
@@ -72,9 +70,4 @@ function createCountries(countries) {
     }).join('')
 
     countryInfo.innerHTML = countriesMarkUp
-}
-
-function clearContent() {
-    countryInfo.innerHTML = ''
-    countryList.innerHTML = ''
 }
