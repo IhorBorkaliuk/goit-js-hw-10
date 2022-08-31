@@ -15,20 +15,24 @@ input.addEventListener('input', debounce(findCountry, DEBOUNCE_DELAY))
 function findCountry(evt) {
     const inputedValue = evt.target.value.trim();
     if (!inputedValue) {
+        clearContent()
         return
     }
 
     fetchCountries(inputedValue).then(data => {
-
+    
         if (data.length === 1) {
+            clearContent()
             createCountry(data)
         }
 
         if (data.length >= 2 & data.length <= 10) {
+            clearContent()
             createCountries(data)
         }
 
         if (data.length > 10) {
+            clearContent()
             Notiflix.Notify.info('Too many matches found. Please enter a more specific name.')
         }
     
@@ -70,4 +74,9 @@ function createCountries(countries) {
     }).join('')
 
     countryInfo.innerHTML = countriesMarkUp
+}
+
+function clearContent() {
+    countryInfo.innerHTML = ''
+    countryList.innerHTML = ''
 }
